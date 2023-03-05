@@ -17,6 +17,7 @@ const SingUpForm = () => {
 
   const { displayName, email, password, confirmPassword } = formFields;
   const { setCurrentUser } = useContext(UserContext);
+
   const resetFormField = () => {
     setFormFields(defaultFormFields);
   };
@@ -33,9 +34,7 @@ const SingUpForm = () => {
       );
 
       setCurrentUser(user);
-      await createUserDocumentFromAuth(user, {
-        displayName,
-      });
+      await createUserDocumentFromAuth(user, { displayName });
       resetFormField();
     } catch (error) {
       if (error.code === "uth/email-already-in-use")

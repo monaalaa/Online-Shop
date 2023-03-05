@@ -32,12 +32,11 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-      resetFormFields();
+      const { user } = await signInUserWithEmailAndPassword(email, password);
+
+      console.log(user, " ");
       setCurrentUser(user);
+      resetFormFields();
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
@@ -82,12 +81,8 @@ const SignInForm = () => {
         />
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button
-            buttonType={BUTTON_TYPE_CLASSES.google}
-            type="button"
-            onClick={signInWithGoogle}
-          >
-            Sign In With Google
+          <Button buttonType="google" type="button" onClick={signInWithGoogle}>
+            Google Sign In
           </Button>
         </div>
       </form>
